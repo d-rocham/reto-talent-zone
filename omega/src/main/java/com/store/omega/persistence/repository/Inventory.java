@@ -13,5 +13,5 @@ public interface Inventory {
 
     Mono<Product> ModifyProductInventory(int productId, int updatedInventoryAmount);
 
-    Mono<Void> DeleteProduct(int id);
+    void DeleteProduct(int id);
 }
