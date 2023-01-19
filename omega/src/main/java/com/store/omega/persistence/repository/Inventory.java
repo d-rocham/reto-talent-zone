@@ -9,7 +9,7 @@ public interface Inventory {
     Mono<Product> GetProductByName(String productName);
     Mono<Product> GetProductById(int id);
 
-    Mono<Product> CreateProduct(String productName, int inInventory, boolean enabled, int min, int max);
+    Mono<Product> CreateProduct(Product newProduct);
 
     Mono<Product> ModifyProductInventory(int updatedInventoryAmount);
 
