@@ -20,13 +20,13 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public Flux<Product> GetAllProducts() {
+    public Flux<Product> getAllProducts() {
         return reactiveMongoTemplate
                 .findAll(Product.class);
     }
 
     @Override
-    public Mono<Product> GetProductByName(String productName) {
+    public Mono<Product> getProductByName(String productName) {
         Query nameQuery = new Query(Criteria.where("name").is(productName));
 
         return reactiveMongoTemplate
@@ -34,7 +34,7 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public Mono<Product> GetProductById(int id) {
+    public Mono<Product> getProductById(int id) {
         Query idQuery = new Query(Criteria.where("id").is(id));
 
         return reactiveMongoTemplate.
@@ -43,13 +43,13 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public Mono<Product> CreateProduct(Product newProduct) {
+    public Mono<Product> createProduct(Product newProduct) {
         return reactiveMongoTemplate
                 .save(newProduct);
     }
 
     @Override
-    public Mono<Product> ModifyProductInventory(int productId, int updatedInventoryAmount) {
+    public Mono<Product> modifyProductInventory(int productId, int updatedInventoryAmount) {
         Query idQuery = new Query(Criteria.where("id").is(productId));
 
         Update update = new Update();
@@ -66,7 +66,7 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public void DeleteProduct(int id) {
+    public void deleteProduct(int id) {
         Query idQuery = new Query(Criteria.where("id").is(id));
 
         reactiveMongoTemplate.remove(idQuery, Product.class);

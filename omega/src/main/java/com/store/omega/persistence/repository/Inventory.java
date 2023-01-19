@@ -5,13 +5,13 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface Inventory {
-    Flux<Product> GetAllProducts();
-    Mono<Product> GetProductByName(String productName);
-    Mono<Product> GetProductById(int id);
+    Flux<Product> getAllProducts();
+    Mono<Product> getProductByName(String productName);
+    Mono<Product> getProductById(int id);
 
-    Mono<Product> CreateProduct(Product newProduct);
+    Mono<Product> createProduct(Product newProduct);
 
-    Mono<Product> ModifyProductInventory(int productId, int updatedInventoryAmount);
+    Mono<Product> modifyProductInventory(int productId, int updatedInventoryAmount);
 
-    void DeleteProduct(int id);
+    void deleteProduct(int id);
 }
