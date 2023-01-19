@@ -14,7 +14,6 @@ public class InventoryRepository implements Inventory {
 
     private final ReactiveMongoTemplate reactiveMongoTemplate;
 
-
     public InventoryRepository(ReactiveMongoTemplate reactiveMongoTemplate) {
         this.reactiveMongoTemplate = reactiveMongoTemplate;
     }

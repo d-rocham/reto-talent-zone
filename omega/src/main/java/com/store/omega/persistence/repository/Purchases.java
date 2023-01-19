@@ -6,8 +6,8 @@ import reactor.core.publisher.Mono;
 
 public interface Purchases {
     Flux<Purchase> getAllPurchases();
-    Mono<Purchase> getPurchaseById();
-    Flux<Purchase> getPurchasesByCx();
-    Mono<Purchase> createPurchase();
+    Mono<Purchase> getPurchaseById(String targetId);
+    Flux<Purchase> getPurchasesByCx(String targetCxId);
+    Mono<Purchase> createPurchase(Purchase newPurchase);
 
 }
