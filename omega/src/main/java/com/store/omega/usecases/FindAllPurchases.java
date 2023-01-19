@@ -12,6 +12,6 @@ public class FindAllPurchases {
     }
 
     public Flux<Purchase> findAllPurchases() {
-        this.purchasesRepository.getAllPurchases();
+        return this.purchasesRepository.getAllPurchases();
     }
 }
