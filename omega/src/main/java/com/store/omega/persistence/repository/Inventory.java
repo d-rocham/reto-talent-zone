@@ -1,6 +1,6 @@
 package com.store.omega.persistence.repository;
 
-import com.store.omega.persistence.models.Product;
+import com.store.omega.domain.Product;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

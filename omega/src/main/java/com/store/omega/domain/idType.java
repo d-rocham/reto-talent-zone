@@ -1,4 +1,4 @@
-package com.store.omega.persistence.models;
+package com.store.omega.domain;
 
 public enum idType {
     CC,

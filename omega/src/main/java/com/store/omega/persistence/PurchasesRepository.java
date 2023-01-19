@@ -1,6 +1,7 @@
-package com.store.omega.persistence.repository;
+package com.store.omega.persistence;
 
-import com.store.omega.persistence.models.Purchase;
+import com.store.omega.domain.Purchase;
+import com.store.omega.persistence.repository.Purchases;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;

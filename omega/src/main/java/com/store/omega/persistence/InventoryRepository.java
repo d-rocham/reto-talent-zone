@@ -1,6 +1,7 @@
-package com.store.omega.persistence.repository;
+package com.store.omega.persistence;
 
-import com.store.omega.persistence.models.Product;
+import com.store.omega.domain.Product;
+import com.store.omega.persistence.repository.Inventory;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -70,4 +71,5 @@ public class InventoryRepository implements Inventory {
 
         reactiveMongoTemplate.remove(idQuery, Product.class);
     }
+
 }
