@@ -1,6 +1,6 @@
 package com.store.omega.persistence;
 
-import com.store.omega.domain.Product;
+import com.store.omega.domain.models.Product;
 import com.store.omega.persistence.repository.Inventory;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -66,7 +66,7 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(String id) {
         Query idQuery = new Query(Criteria.where("id").is(id));
 
         reactiveMongoTemplate.remove(idQuery, Product.class);

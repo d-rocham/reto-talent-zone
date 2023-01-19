@@ -1,4 +1,4 @@
-package com.store.omega.domain;
+package com.store.omega.domain.models;
 
 public class Product {
     private String id;

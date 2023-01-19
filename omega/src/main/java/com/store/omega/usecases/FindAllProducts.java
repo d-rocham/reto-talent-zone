@@ -1,6 +1,6 @@
 package com.store.omega.usecases;
 
-import com.store.omega.domain.Product;
+import com.store.omega.domain.models.Product;
 import com.store.omega.persistence.InventoryRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

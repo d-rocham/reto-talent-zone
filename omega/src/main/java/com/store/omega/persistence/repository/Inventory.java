@@ -1,6 +1,6 @@
 package com.store.omega.persistence.repository;
 
-import com.store.omega.domain.Product;
+import com.store.omega.domain.models.Product;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -13,5 +13,5 @@ public interface Inventory {
 
     Mono<Product> modifyProductInventory(int productId, int updatedInventoryAmount);
 
-    void deleteProduct(int id);
+    void deleteProduct(String id);
 }
