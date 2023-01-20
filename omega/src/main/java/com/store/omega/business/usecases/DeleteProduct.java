@@ -1,4 +1,4 @@
-package com.store.omega.usecases;
+package com.store.omega.business.usecases;
 
 import com.store.omega.persistence.InventoryRepository;
 import org.springframework.stereotype.Service;

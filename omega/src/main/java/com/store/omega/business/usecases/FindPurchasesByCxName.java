@@ -1,4 +1,4 @@
-package com.store.omega.usecases;
+package com.store.omega.business.usecases;
 
 import com.store.omega.domain.models.Purchase;
 import com.store.omega.persistence.PurchasesRepository;

@@ -1,4 +1,4 @@
-package com.store.omega.usecases;
+package com.store.omega.business.usecases;
 
 import com.store.omega.domain.models.Product;
 import com.store.omega.persistence.InventoryRepository;
@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class FindProductByName {
+public class CreateNewProduct {
     private final InventoryRepository inventoryRepository;
 
-    public FindProductByName(InventoryRepository inventoryRepository) {
+    public CreateNewProduct(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public Mono<Product> findProductByName(String productName) {
-        return this.inventoryRepository.getProductByName(productName);
+    public Mono<Product> createNewProduct(Product newProduct) {
+        return inventoryRepository.createProduct(newProduct);
     }
 }
