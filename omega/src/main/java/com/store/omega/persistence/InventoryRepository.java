@@ -48,7 +48,7 @@ public class InventoryRepository implements Inventory {
 
     @Override
     public Mono<Product> getProductById(int id) {
-        Query idQuery = new Query(Criteria.where("id").is(id));
+        Query idQuery = new Query(Criteria.where("_id").is(id));
 
         return reactiveMongoTemplate.
                 findOne(idQuery, Product.class);
@@ -63,7 +63,7 @@ public class InventoryRepository implements Inventory {
 
     @Override
     public Mono<Product> modifyProductInventory(String productId, int updatedInventoryAmount) {
-        Query idQuery = new Query(Criteria.where("id").is(productId));
+        Query idQuery = new Query(Criteria.where("_id").is(productId));
 
         Update update = new Update();
 
