@@ -14,7 +14,7 @@ public class CreateNewProduct {
     }
 
     public Mono<Product> createNewProduct(Mono<Product> newProduct) {
-        newProduct.map(inventoryRepository::createProduct);
+        return newProduct.flatMap(inventoryRepository::createProduct);
 
     }
 }
