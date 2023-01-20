@@ -49,7 +49,7 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public Mono<Product> modifyProductInventory(int productId, int updatedInventoryAmount) {
+    public Mono<Product> modifyProductInventory(String productId, int updatedInventoryAmount) {
         Query idQuery = new Query(Criteria.where("id").is(productId));
 
         Update update = new Update();

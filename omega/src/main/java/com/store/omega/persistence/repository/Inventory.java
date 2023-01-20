@@ -11,7 +11,7 @@ public interface Inventory {
 
     Mono<Product> createProduct(Product newProduct);
 
-    Mono<Product> modifyProductInventory(int productId, int updatedInventoryAmount);
+    Mono<Product> modifyProductInventory(String productId, int updatedInventoryAmount);
 
     void deleteProduct(String id);
 }
