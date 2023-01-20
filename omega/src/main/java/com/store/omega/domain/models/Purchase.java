@@ -1,8 +1,10 @@
 package com.store.omega.domain.models;
 
-import org.springframework.data.annotation.Id;
+import com.store.omega.business.businessobjects.PurchaseBO;
+import com.store.omega.domain.generic.PurchasedProduct;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import com.store.omega.domain.generic.idType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,10 +14,19 @@ public class Purchase {
     @MongoId
     private String id;
     private LocalDateTime dateTime;
-    private com.store.omega.domain.idType idType;
+    private idType idType;
     private String cxId;
     private String customerName;
     private ArrayList<PurchasedProduct> purchasedProducts;
+
+    public Purchase(PurchaseBO purchaseBO) {
+        this.dateTime = purchaseBO.getDateTime();
+        this.idType = purchaseBO.getIdType();
+        this.cxId = purchaseBO.getCxId();
+        this.customerName = purchaseBO.getCustomerName();
+        this.purchasedProducts = purchaseBO.getPurchasedProducts();
+    }
+
 
     public String getId() {
         return id;
@@ -25,7 +36,7 @@ public class Purchase {
         return dateTime;
     }
 
-    public com.store.omega.domain.idType getIdType() {
+    public idType getIdType() {
         return idType;
     }
 
