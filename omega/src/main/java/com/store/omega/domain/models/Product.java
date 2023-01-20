@@ -1,10 +1,12 @@
 package com.store.omega.domain.models;
 
 import com.store.omega.business.businessobjects.ProductBO;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document
+@NoArgsConstructor
 public class Product {
     @MongoId
     private String id;

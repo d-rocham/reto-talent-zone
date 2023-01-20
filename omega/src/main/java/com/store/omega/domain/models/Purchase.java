@@ -2,6 +2,7 @@ package com.store.omega.domain.models;
 
 import com.store.omega.business.businessobjects.PurchaseBO;
 import com.store.omega.domain.generic.PurchasedProduct;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import com.store.omega.domain.generic.idType;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Document
+@NoArgsConstructor
 public class Purchase {
     @MongoId
     private String id;
