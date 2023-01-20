@@ -1,19 +1,18 @@
 package com.store.omega.business.businessobjects;
 
+import com.store.omega.business.dto.ProductDTO;
 import com.store.omega.domain.models.Product;
 
 public class ProductBO {
-    private String id;
     private String name;
     private int inInventory;
     private boolean enabled;
     private int min;
     private int max;
 
-    public ProductBO(Product rootProduct) {
-        this.id = rootProduct.getId();
-        this.name = rootProduct.getName();
-        this.inInventory = rootProduct.getInInventory();
+    public ProductBO(ProductDTO rootProduct) {
+        this.name = rootProduct.getName().toLowerCase();
+        this.inInventory = Math.max(rootProduct.getInInventory(), 0);
         this.enabled = rootProduct.isEnabled();
         this.min = rootProduct.getMin();
         this.max = rootProduct.getMax();
@@ -26,10 +25,6 @@ public class ProductBO {
         this.inInventory = inInventory - requestedPurchase;
 
         }
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {

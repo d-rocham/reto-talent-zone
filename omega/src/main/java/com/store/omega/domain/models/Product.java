@@ -1,5 +1,6 @@
 package com.store.omega.domain.models;
 
+import com.store.omega.business.businessobjects.ProductBO;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -13,13 +14,12 @@ public class Product {
     private int min;
     private int max;
 
-    public Product(String id, String name, int inInventory, boolean enabled, int min, int max) {
-        this.id = id;
-        this.name = name;
-        this.inInventory = inInventory;
-        this.enabled = enabled;
-        this.min = min;
-        this.max = max;
+    public Product(ProductBO productBO) {
+        this.name = productBO.getName();
+        this.inInventory = productBO.getInInventory();
+        this.enabled = productBO.isEnabled();
+        this.min = productBO.getMin();
+        this.max = productBO.getMax();
     }
 
     public String getId() {
