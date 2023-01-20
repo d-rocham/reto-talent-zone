@@ -1,6 +1,11 @@
 package com.store.omega.domain.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+@Document
 public class Product {
+    @MongoId
     private String id;
     private String name;
     private int inInventory;
