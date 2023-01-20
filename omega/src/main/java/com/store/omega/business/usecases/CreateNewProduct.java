@@ -13,7 +13,8 @@ public class CreateNewProduct {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public Mono<Product> createNewProduct(Product newProduct) {
-        return inventoryRepository.createProduct(newProduct);
+    public Mono<Product> createNewProduct(Mono<Product> newProduct) {
+        newProduct.map(inventoryRepository::createProduct);
+
     }
 }
