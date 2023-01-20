@@ -5,9 +5,11 @@ import com.store.omega.domain.models.Purchase;
 import com.store.omega.persistence.InventoryRepository;
 import com.store.omega.persistence.PurchasesRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 
+@Service
 public class PerformPurchase {
     private final InventoryRepository inventoryRepository;
     private final PurchasesRepository purchasesRepository;
@@ -17,15 +19,9 @@ public class PerformPurchase {
         this.purchasesRepository = purchasesRepository;
     }
 
-    private Mono<Boolean> isStockEnough(int productId, int intendedAmount) {
-
-        return this.inventoryRepository.getProductById(productId)
-                .map(product -> product.getInInventory() > intendedAmount);
-    }
-
     public Mono<Purchase> performPurchase(Purchase newPurchase){
 
-        newPurchase.getPurchasedProducts().stream().map(
+        newPurchase.getPurchasedProducts().forEach(
                 purchasedProduct -> this.inventoryRepository
                         .getProductById(purchasedProduct.getId())
                         .map(ProductBO::new)
