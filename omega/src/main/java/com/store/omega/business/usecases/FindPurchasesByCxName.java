@@ -13,7 +13,7 @@ public class FindPurchasesByCxName {
         this.purchasesRepository = purchasesRepository;
     }
 
-    Flux<Purchase> findPurchasesByCxName(String cxName) {
+    public Flux<Purchase> findPurchasesByCxName(String cxName) {
         return this.purchasesRepository.getPurchasesByCx(cxName);
     }
 }
