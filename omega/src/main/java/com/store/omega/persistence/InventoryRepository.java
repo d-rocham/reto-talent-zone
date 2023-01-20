@@ -2,6 +2,7 @@ package com.store.omega.persistence;
 
 import com.store.omega.domain.models.Product;
 import com.store.omega.persistence.repository.Inventory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Repository
 public class InventoryRepository implements Inventory {
 
@@ -17,6 +19,14 @@ public class InventoryRepository implements Inventory {
 
     public InventoryRepository(ReactiveMongoTemplate reactiveMongoTemplate) {
         this.reactiveMongoTemplate = reactiveMongoTemplate;
+    }
+
+    private static void logError(Throwable error) {
+        log.error(error.getMessage());
+    }
+
+    private static void logSuccessfulOperation(String successMessage) {
+        log.info(successMessage);
     }
 
     @Override
@@ -30,7 +40,10 @@ public class InventoryRepository implements Inventory {
         Query nameQuery = new Query(Criteria.where("name").is(productName));
 
         return reactiveMongoTemplate
-                .findOne(nameQuery, Product.class);
+                .findOne(nameQuery, Product.class)
+                .switchIfEmpty(Mono.error(new IllegalAccessException("Product with requested name was not found.")))
+                .doOnError(InventoryRepository::logError)
+                .doOnSuccess(e -> logSuccessfulOperation("Product found"));
     }
 
     @Override
@@ -55,7 +68,7 @@ public class InventoryRepository implements Inventory {
         Update update = new Update();
 
         return reactiveMongoTemplate
-                .findOne(idQuery, Product.class)
+                .findById(productId, Product.class)
                 .flatMap(product -> {
                     update.set("inInventory", updatedInventoryAmount);
 
@@ -66,9 +79,9 @@ public class InventoryRepository implements Inventory {
 
     @Override
     public void deleteProduct(String id) {
-        Query idQuery = new Query(Criteria.where("id").is(id));
+        reactiveMongoTemplate
+                .findAndRemove(new Query(Criteria.where("_id").is(id)), Product.class)
+                .subscribe(product -> log.info(product.getName()));
 
-        reactiveMongoTemplate.remove(idQuery, Product.class);
     }
-
 }
