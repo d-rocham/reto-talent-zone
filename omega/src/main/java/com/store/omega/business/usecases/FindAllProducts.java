@@ -1,6 +1,6 @@
 package com.store.omega.business.usecases;
 
-import com.store.omega.domain.models.Product;
+import com.store.omega.business.dto.ProductDTO;
 import com.store.omega.persistence.InventoryRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -13,7 +13,7 @@ public class FindAllProducts {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public Flux<Product> findAllProducts() {
-        return  this.inventoryRepository.getAllProducts();
+    public Flux<ProductDTO> findAllProducts() {
+        return this.inventoryRepository.getAllProducts().map(ProductDTO::new);
     }
 }
