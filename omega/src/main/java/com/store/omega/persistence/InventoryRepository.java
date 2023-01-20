@@ -61,7 +61,6 @@ public class InventoryRepository implements Inventory {
 
                     return reactiveMongoTemplate
                             .findAndModify(idQuery, update, Product.class);
-
                 });
     }
 
