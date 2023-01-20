@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 public interface Inventory {
     Flux<Product> getAllProducts();
     Mono<Product> getProductByName(String productName);
-    Mono<Product> getProductById(int id);
+    Mono<Product> getProductById(String id);
 
     Mono<Product> createProduct(Product newProduct);
 

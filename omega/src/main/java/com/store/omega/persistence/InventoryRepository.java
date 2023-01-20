@@ -47,7 +47,7 @@ public class InventoryRepository implements Inventory {
     }
 
     @Override
-    public Mono<Product> getProductById(int id) {
+    public Mono<Product> getProductById(String id) {
         Query idQuery = new Query(Criteria.where("_id").is(id));
 
         return reactiveMongoTemplate.

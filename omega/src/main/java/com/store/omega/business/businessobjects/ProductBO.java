@@ -32,8 +32,7 @@ public class ProductBO {
         if (requestedPurchase > this.inInventory) {
             throw new Exception("Requested amount is higher than purchase");
         } else {
-        this.inInventory = inInventory - requestedPurchase;
-
+            this.inInventory = inInventory - requestedPurchase;
         }
     }
 

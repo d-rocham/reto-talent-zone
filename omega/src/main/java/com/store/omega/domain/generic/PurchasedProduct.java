@@ -1,10 +1,10 @@
 package com.store.omega.domain.generic;
 
 public class PurchasedProduct {
-    private int id;
+    private String id;
     private int amount;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
