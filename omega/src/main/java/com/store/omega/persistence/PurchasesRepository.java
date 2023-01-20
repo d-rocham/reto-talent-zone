@@ -33,8 +33,8 @@ public class PurchasesRepository implements Purchases {
     }
 
     @Override
-    public Flux<Purchase> getPurchasesByCx(String targetCxId) {
-        Query cxQuery = new Query(Criteria.where("cxId").is(targetCxId));
+    public Flux<Purchase> getPurchasesByCx(String cxName) {
+        Query cxQuery = new Query(Criteria.where("customerName").is(cxName));
 
         return reactiveMongoTemplate
                 .find(cxQuery, Purchase.class);
