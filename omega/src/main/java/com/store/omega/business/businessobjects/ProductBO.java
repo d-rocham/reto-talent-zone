@@ -4,6 +4,7 @@ import com.store.omega.business.dto.ProductDTO;
 import com.store.omega.domain.models.Product;
 
 public class ProductBO {
+    private String id;
     private String name;
     private int inInventory;
     private boolean enabled;
@@ -18,6 +19,15 @@ public class ProductBO {
         this.max = rootProduct.getMax();
     }
 
+    public ProductBO(Product product) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.inInventory = product.getInInventory();
+        this.enabled = product.isEnabled();
+        this.min = product.getMin();
+        this.max = product.getMax();
+    }
+
     public void setInInventory(int requestedPurchase) throws Exception {
         if (requestedPurchase > this.inInventory) {
             throw new Exception("Requested amount is higher than purchase");
@@ -25,6 +35,10 @@ public class ProductBO {
         this.inInventory = inInventory - requestedPurchase;
 
         }
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -46,4 +60,5 @@ public class ProductBO {
     public int getMax() {
         return max;
     }
+
 }
