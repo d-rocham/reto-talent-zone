@@ -1,4 +1,4 @@
-package com.store.omega.domain.models;
+package com.store.omega.domain.generic;
 
 public class PurchasedProduct {
     private int id;
