@@ -1,5 +1,6 @@
 package com.store.omega.business.usecases;
 
+import com.store.omega.api.middleware.EventBus;
 import com.store.omega.business.businessobjects.ProductBO;
 import com.store.omega.business.businessobjects.PurchaseBO;
 import com.store.omega.business.dto.PurchaseDTO;
@@ -18,9 +19,12 @@ public class PerformPurchase {
     private final InventoryRepository inventoryRepository;
     private final PurchasesRepository purchasesRepository;
 
-    public PerformPurchase(InventoryRepository inventoryRepository, PurchasesRepository purchasesRepository) {
+    private final EventBus eventBus;
+
+    public PerformPurchase(InventoryRepository inventoryRepository, PurchasesRepository purchasesRepository, EventBus eventBus) {
         this.inventoryRepository = inventoryRepository;
         this.purchasesRepository = purchasesRepository;
+        this.eventBus = eventBus;
     }
 
     public Mono<PurchaseDTO> performPurchase(Mono<PurchaseDTO> newPurchase){
@@ -48,7 +52,9 @@ public class PerformPurchase {
                 ))
                 .onErrorResume(throwable -> Mono.error(new Throwable(HttpStatus.NOT_ACCEPTABLE.toString())))
                 .flatMap(purchaseBO -> this.purchasesRepository.createPurchase(new Purchase(purchaseBO)))
-                .map(PurchaseDTO::new);
+                .map(PurchaseDTO::new)
+                .doOnSuccess(purchaseDTO -> eventBus.publishNewSale(purchaseDTO));
+
     }
 
 }
