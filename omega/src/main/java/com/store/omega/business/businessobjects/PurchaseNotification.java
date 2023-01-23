@@ -16,6 +16,7 @@ public class PurchaseNotification {
     private ArrayList<DetailedPurchasedProduct> purchasedProducts;
 
     public PurchaseNotification() {
+        this.purchasedProducts = new ArrayList<>();
     }
 
     public void setId(String id) {
