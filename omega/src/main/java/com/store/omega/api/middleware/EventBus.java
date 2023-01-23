@@ -1,5 +1,6 @@
 package com.store.omega.api.middleware;
 
+import com.store.omega.business.businessobjects.PurchaseNotification;
 import com.store.omega.business.dto.PurchaseDTO;
 import com.store.omega.domain.models.Purchase;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -26,10 +27,10 @@ public class EventBus {
         );
     }
 
-    public void publishNewSale(PurchaseDTO newPurchase) {
+    public void publishNewSale(PurchaseNotification purchaseNotification) {
                 convertAndSend(
                         RabbitConfig.SALES_QUEUE_KEY,
-                        gson.toJson(newPurchase).getBytes()
+                        gson.toJson(purchaseNotification).getBytes()
         );
     }
 }
