@@ -1,8 +1,10 @@
 package com.store.omega.business.usecases;
 
 import com.store.omega.api.middleware.EventBus;
+import com.store.omega.business.businessobjects.DetailedPurchasedProduct;
 import com.store.omega.business.businessobjects.ProductBO;
 import com.store.omega.business.businessobjects.PurchaseBO;
+import com.store.omega.business.businessobjects.PurchaseNotification;
 import com.store.omega.business.dto.PurchaseDTO;
 import com.store.omega.domain.models.Purchase;
 import com.store.omega.persistence.InventoryRepository;
@@ -28,12 +30,36 @@ public class PerformPurchase {
     }
 
     public Mono<PurchaseDTO> performPurchase(Mono<PurchaseDTO> newPurchase){
-        return newPurchase.map(PurchaseBO::new)
+
+        PurchaseNotification purchaseNotification = new PurchaseNotification();
+
+        return newPurchase.map(purchaseDTO -> {
+
+            PurchaseBO purchaseBO = new PurchaseBO(purchaseDTO);
+
+            purchaseNotification.setCustomerName(purchaseDTO.getCustomerName());
+            purchaseNotification.setIdType(purchaseDTO.getIdType());
+            purchaseNotification.setCxId(purchaseDTO.getCxId());
+            purchaseNotification.setDateTime(purchaseBO.getDateTime());
+
+            return purchaseBO;
+        })
                 .doOnNext(purchaseBO -> purchaseBO.getPurchasedProducts().forEach(
                         purchasedProduct -> {
                             this.inventoryRepository
                                     .getProductById(purchasedProduct.getId())
-                                    .map(ProductBO::new)
+                                    .map(product -> {
+                                        ProductBO productBO = new ProductBO(product);
+
+                                        purchaseNotification.appendDetailedProduct(
+                                                new DetailedPurchasedProduct(
+                                                        product.getId(),
+                                                        purchasedProduct.getAmount(),
+                                                        productBO.getName())
+                                        );
+
+                                        return productBO;
+                                    })
                                     .subscribe(productBO -> {
                                         try {
                                             productBO.setInInventory(purchasedProduct.getAmount());
@@ -53,7 +79,7 @@ public class PerformPurchase {
                 .onErrorResume(throwable -> Mono.error(new Throwable(HttpStatus.NOT_ACCEPTABLE.toString())))
                 .flatMap(purchaseBO -> this.purchasesRepository.createPurchase(new Purchase(purchaseBO)))
                 .map(PurchaseDTO::new)
-                .doOnSuccess(purchaseDTO -> eventBus.publishNewSale(purchaseDTO));
+                .doOnSuccess(purchaseDTO -> eventBus.publishNewSale(purchaseNotification));
 
     }
 
