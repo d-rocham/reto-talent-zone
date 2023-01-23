@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,intellij,visualstudiocode,angular,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,intellij,visualstudiocode,angular,linux
 
+reto_todo.txt
+
 ### Angular ###
 ## Angular ##
 # compiled output
