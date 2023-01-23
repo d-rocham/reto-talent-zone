@@ -18,6 +18,7 @@ public class EventBus {
     }
 
     private void convertAndSend(String routingKey, byte[] target) {
+        // routingKey provided as parameter to re-use this function in other future examples
         rabbitTemplate.convertAndSend(
                 RabbitConfig.EXCHANGE,
                 routingKey,
@@ -25,10 +26,10 @@ public class EventBus {
         );
     }
 
-    public void publishNewSale(PurchaseDTO newPurchaseDTO) {
+    public void publishNewSale(PurchaseDTO newPurchase) {
                 convertAndSend(
                         RabbitConfig.SALES_QUEUE_KEY,
-                        gson.toJson(newPurchaseDTO).getBytes()
+                        gson.toJson(newPurchase).getBytes()
         );
     }
 }
