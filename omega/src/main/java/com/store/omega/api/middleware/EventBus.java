@@ -1,6 +1,7 @@
 package com.store.omega.api.middleware;
 
 import com.store.omega.business.dto.PurchaseDTO;
+import com.store.omega.domain.models.Purchase;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
@@ -24,12 +25,10 @@ public class EventBus {
         );
     }
 
-    public void publishNewSale(Mono<PurchaseDTO> purchaseDTOMono) {
-        purchaseDTOMono.subscribe(purchaseDTO ->
+    public void publishNewSale(PurchaseDTO newPurchaseDTO) {
                 convertAndSend(
                         RabbitConfig.SALES_QUEUE_KEY,
-                        gson.toJson(purchaseDTO).getBytes()
-                )
+                        gson.toJson(newPurchaseDTO).getBytes()
         );
     }
 }
