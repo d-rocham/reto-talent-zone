@@ -2,6 +2,7 @@ package com.store.delta.web;
 
 import com.google.gson.Gson;
 import com.store.delta.notifications.DetailedPurchasedProduct;
+import com.store.delta.notifications.PurchaseNotification;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
 import jakarta.websocket.OnOpen;
@@ -67,9 +68,9 @@ public class SalesSocketController {
         log.error(throwable.getMessage());
     }
 
-    public void submitNewSale(String correlationId, DetailedPurchasedProduct detailedPurchasedProduct){
+    public void submitNewSale(String correlationId, PurchaseNotification purchaseNotification){
         if (Objects.nonNull(correlationId) && sessions.containsKey(correlationId)) {
-            broadcastJSON(gson.toJson(detailedPurchasedProduct), correlationId);
+            broadcastJSON(gson.toJson(purchaseNotification), correlationId);
         }
     }
 
