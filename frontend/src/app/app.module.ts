@@ -8,6 +8,7 @@ import { CartComponent } from './views/storeView/components/cart/cart.component'
 import { ProductTableComponent } from './views/storeView/components/product-table/product-table.component';
 import { ProductRowComponent } from './views/storeView/components/product-row/product-row.component';
 import { PurchasedProductComponent } from './views/storeView/components/purchased-product/purchased-product.component';
+import { StoreViewComponent } from './views/storeView/store-view/store-view.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PurchasedProductComponent } from './views/storeView/components/purchase
     CartComponent,
     ProductTableComponent,
     ProductRowComponent,
-    PurchasedProductComponent
+    PurchasedProductComponent,
+    StoreViewComponent
   ],
   imports: [
     BrowserModule,
