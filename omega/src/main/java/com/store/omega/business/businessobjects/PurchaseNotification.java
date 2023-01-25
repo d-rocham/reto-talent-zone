@@ -1,6 +1,5 @@
 package com.store.omega.business.businessobjects;
 
-import com.store.omega.domain.generic.PurchasedProduct;
 import com.store.omega.domain.generic.idType;
 
 import java.time.LocalDateTime;
